@@ -1,9 +1,11 @@
-# ACE COMBAT 8 — UEVR 中文 HUD / 菜单修复
+# ACE COMBAT 8 — UEVR HUD / 菜单修复
+
 
 用 UEVR 把 **ACE COMBAT 8**（Steam appid `2288340`）转成 VR 后，
-**飞行 HUD 和所有菜单在头显里完全不显示**。这个脚本修好了它。
-
+**飞行 HUD 和所有菜单在头显里完全不显示**。
+使用这个脚本可以看到雷达、航向标记和武器了，但是攻角和机炮还是看不到。
 只影响运行时内存，不改游戏文件，重启游戏即完全恢复。
+使用Deepseek生成，不清楚具体原理😂。
 
 ---
 
@@ -13,7 +15,7 @@
 |---|---|---|
 | 飞行 HUD | 不可见 | ✅ 正常显示 |
 | 暂停菜单 / 各级菜单 | 不可见 | ✅ 正常显示 |
-| 跟随视角 | — | ✅ 可用 UEVR 的 `UI follows view` |
+| HUD跟随VR视角 | — | ✅ 可用 UEVR 的 `UI follows view` |
 | 俯仰梯（攻角表）、机炮准星 | 不可见 | ❌ 仍未显示，见下文 |
 
 ---
@@ -29,34 +31,26 @@
 
    （在文件资源管理器地址栏直接粘贴这一行即可打开该目录）
 
-3. 进入游戏后按 **Insert** 打开 UEVR 菜单 → **LuaLoader** → **Run script**
-   - 游戏已经在运行时，点 **Reset scripts** 也可以
+3. 进入游戏后按 **Insert** 打开 UEVR 菜单 → **LuaLoader** → 勾选ac8_ui_fix.lua（默认应该是启用的，游戏已经在运行的话，点 Reset scripts 也行）
 4. 生效标志：VR 里 HUD 和菜单出现；脚本目录下的 `data\ac8_ui_fix.txt` 生成日志
 
 也可以直接从 [Releases](../../releases) 下载 `ac8_ui_fix.lua`。
 
 ---
 
-## 原理（一句话）
+## 大概原理
 
-本作的 HUD 和菜单**不走游戏视口的 Slate 窗口**，所以 UEVR 的 UI 捕获看不到它们。
+本作的 HUD 和菜单不走游戏视口的 Slate 窗口，所以 UEVR 的 UI 捕获看不到它们。
 脚本把这些控件重新推回游戏视口，UEVR 就能抓到并作为 OpenXR UI 图层提交。
-
-只改「控件挂在哪」，**不改可见性**——什么时候显示仍由游戏决定，
-被游戏折叠的控件不会被画出来，所以不会出现满屏垃圾。
+只改控件挂在哪，不改可见性，什么时候显示仍由游戏决定。
 
 ---
 
 ## 已知未解决
 
 **俯仰梯（攻角表）和机炮准星仍然不显示。**
-
-现象（实测描述）：
-
-- 攻角表出现在 VR 视野的右下方
-- 转动视角时，它和看向世界的角度不成比例
-- 不随 VR 头部转动，而是随游戏自带的右摇杆移动视角转动
-
+- 攻角表出现在 VR 视野的右下方，右摇杆移动视角转动才可以看到
+- 不随 VR 头部转动，而是随游戏自带的
 本脚本未修复这些元素。
 
 ---
@@ -66,27 +60,3 @@
 - 在 `UEVR-joeyhodge_AFW_v1.0-beta.6 / AFW-Compat-v0.1.0-alpha.5` 上验证
 - 脚本只依赖标准 LuaVR API，理论上其他 UEVR 版本也可用
 - 游戏更新后控件名若变化，改脚本顶部的 `WANT` 列表即可
-
----
-
-## 贡献者
-
-- **Claude Code (Anthropic)** — 代码实现、运行时诊断与排查
-- **lovezzzxxx** — 项目发起、全程实机测试与验证
-
----
-
-## English
-
-Fixes missing HUD and menus when playing **ACE COMBAT 8** in VR via UEVR.
-The game's HUD and menus do not go through the game viewport's Slate window,
-so UEVR's UI capture never sees them. This script pushes the relevant root
-widgets back into the viewport.
-
-Drop `ac8_ui_fix.lua` into `%APPDATA%\UnrealVRMod\AceCombat8\scripts\` and load it
-via LuaLoader. Runtime-only, fully reverted by restarting the game.
-
-**Still not displayed:** pitch ladder (angle of attack gauge) and gun reticle.
-Reported behaviour: the gauge appears at the lower right of the VR view, does not
-scale proportionally with the world when turning, does not follow head rotation,
-and moves with the game's right-stick camera instead. Not addressed by this script.
