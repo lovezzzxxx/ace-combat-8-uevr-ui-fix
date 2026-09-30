@@ -4,7 +4,7 @@
 用 UEVR 把 ACE COMBAT 8 转成 VR 后，飞行 HUD 和所有菜单在头显里完全不显示。
 
 ■ 修复脚本
-https://github.com/【这里填仓库地址】
+https://github.com/https://github.com/lovezzzxxx/ace-combat-8-uevr-ui-fix
 
 ■ 用法（3 步）
 1. 把 ac8_ui_fix.lua 放进 %APPDATA%\UnrealVRMod\AceCombat8\scripts\
