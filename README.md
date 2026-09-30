@@ -46,6 +46,7 @@
 ## 兼容性
 
 - 在 `UEVR-joeyhodge_AFW_v1.0-beta.6 / AFW-Compat-v0.1.0-alpha.5` 上验证
+- 该版本来自 [joeyhodge/UEVR](https://github.com/joeyhodge/UEVR)（[对应提交 832bff79](https://github.com/joeyhodge/UEVR/commit/832bff79db09304c1bc68512f8fd3c9ec60dec06)）—— 基于 [praydog/UEVR](https://github.com/praydog/UEVR)
 - 脚本只依赖标准 LuaVR API，理论上其他 UEVR 版本也可用
 - 游戏更新后控件名若变化，改脚本顶部的 `WANT` 列表即可
 
