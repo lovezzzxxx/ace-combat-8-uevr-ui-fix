@@ -1,6 +1,6 @@
 # ACE COMBAT 8 — UEVR HUD / 菜单修复
 
-已有更完善的lua修复，参考[【皇牌空战8】VR模组全球首发！B友先爽】](https://www.bilibili.com/video/BV194a16PEBg)，本项目已停用
+已有更完善的lua修复，参考[【皇牌空战8】VR模组全球首发！B友先爽】](https://www.bilibili.com/video/BV194a16PEBg)，本项目已停用  
 使用 UEVR 注入 ACE COMBAT 8 后 HUD 和菜单在VR里不显示。  
 使用这个脚本可以看到雷达、航向标记和武器了，但是攻角和机炮还是看不到。  
 只影响运行时内存，不改游戏文件，重启游戏即完全恢复。  
